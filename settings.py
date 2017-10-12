@@ -9,7 +9,8 @@ class Settings(object):
             bullet_width=3,
             bullet_height=15,
             bullet_color=(60, 60, 60),
-            bullet_speed_factor=3):
+            bullet_speed_factor=3,
+            bullet_num_limit=5):
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.bg_color = bg_color
@@ -18,3 +19,4 @@ class Settings(object):
         self.bullet_height = bullet_height
         self.bullet_color = bullet_color
         self.bullet_speed_factor = bullet_speed_factor
+        self.bullet_num_limit = bullet_num_limit

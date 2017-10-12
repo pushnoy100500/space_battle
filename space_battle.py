@@ -38,8 +38,7 @@ class Game(object):
         if event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         if event.key == pygame.K_SPACE:
-            new_bullet = Bullet(self.settings, self.screen, self.ship)
-            self.bullets.add(new_bullet)
+            self.fire_bullet()
 
     def check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -47,7 +46,13 @@ class Game(object):
         if event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
-    def clear_bullets(self):
+    def fire_bullet(self):
+        if len(self.bullets) < self.settings.bullet_num_limit:
+            new_bullet = Bullet(self.settings, self.screen, self.ship)
+            self.bullets.add(new_bullet)
+
+    def update_bullets(self):
+        self.bullets.update()
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
@@ -57,7 +62,7 @@ class Game(object):
         while True:
             self.check_events()
             self.ship.update_position()
-            self.bullets.update()            
+            self.update_bullets()
             self.update_screen()
 
     def update_screen(self):
